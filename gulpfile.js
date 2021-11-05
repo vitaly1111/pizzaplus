@@ -82,10 +82,11 @@ const libCSS=() => {
 } */
 
 const imgToApp=()=>{
-	return src(['src/images/**/*.jpg',
-		'src/images/**/*.png',
-		'src/images/**/*.jpeg'])
-	.pipe(dest('app/images'));
+	return src(['src/img/**/*.jpg',
+		'src/img/**/*.png',
+		'src/img/**/*.jpeg',
+		'src/img/**/*.svg'])
+	.pipe(dest('app/img'));
 }
 const resourcesToApp=()=>{
 	return src(['src/resources/**/*.*',
