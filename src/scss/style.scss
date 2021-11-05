@@ -1,0 +1,21 @@
+@import 'fonts';
+
+.test {
+	text-align: center;
+	&__box {
+		color: green;
+	}
+}
+
+body{
+	background-color: blue;
+	font-family: 'SlabPro';
+	font-weight: 700;
+	p{
+		color: #1c1c1c;
+		font-size: 40px;
+		line-height: 23px;
+	}
+}
+
+@import 'second';
