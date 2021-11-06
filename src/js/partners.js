@@ -6,7 +6,7 @@ const renderItems=(data)=>{
 		console.log(item)
 	});
 }
-	fetch('./db/partners.json')
+	fetch('https://pizzaplus-4c873-default-rtdb.firebaseio.com/db/partners.json')
 		.then( res => {
 			return res.json()
 		}

@@ -8,7 +8,7 @@ export const menu=(rest) => {
 		});
 		
 	}
-	fetch(`./db/${rest}.json`)
+	fetch(`https://pizzaplus-4c873-default-rtdb.firebaseio.com/db/${rest}.json`)
 		.then(res => {
 			return res.json();
 		}
