@@ -68,7 +68,7 @@ const libCSS=() => {
 		.pipe(dest('app/css'))
 
 		.pipe(browserSync.stream())
-}
+} 
 
 /* function scripts() {
 	return src([
