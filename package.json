@@ -4,6 +4,7 @@
   "description": "gulp",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {},
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.15.5",

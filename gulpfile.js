@@ -23,6 +23,7 @@ const { src,dest,watch,parallel,series }=require('gulp'),
 	tinypng=require('gulp-tinypng-compress')
 	autoprefixer=require('gulp-autoprefixer'),
 	gutil=require('gulp-util'),
+	rename=require('gulp-rename'),
 	ftp=require('vinyl-ftp')
 
 const styles=() => {
@@ -147,14 +148,19 @@ const htmlInclude=()=> {
 }
 
 const scripts=()=>{
-	return src('src/js/main.js')
+	return src(['src/js/main.js','src/js/restaurant.js'])
 	.pipe(webpackStream({
+		mode: 'development',
+		  entry: {
+        main: './src/js/main.js',
+        restaurant: './src/js/restaurant.js'
+    },
 		output:{
-			filename: 'main.js'
+			filename: '[name].js'
 		},
 		module: {
 			rules: [
-				{
+				{ 	
 					test: /\.m?js$/,
 					exclude: /(node_modules|bower_components)/,
 					use: {
@@ -167,9 +173,12 @@ const scripts=()=>{
 			]
 		}
 	}))
-	.pipe(concat('main.min.js'))
+
 	.pipe(sourcemaps.init())
 	.pipe(uglify().on('error',notify.onError()))
+	.pipe(rename({
+    suffix: ".min"
+  }))
 	.pipe(sourcemaps.write('.'))
 	.pipe(dest('app/js/'))
 	.pipe(browserSync.stream())

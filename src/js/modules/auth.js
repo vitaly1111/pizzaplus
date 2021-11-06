@@ -49,6 +49,7 @@ export const auth=() => {
 		//logIn(user)
 		if (inputLogin.value!="") {
 			localStorage.setItem('user',JSON.stringify(user))
+			logIn(JSON.parse(localStorage.getItem('user')))
 
 		} else {
 			alert('Логин или пароль неверен')

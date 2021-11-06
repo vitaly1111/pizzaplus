@@ -1,8 +1,8 @@
-import {auth} from './auth'
-import { partners } from './partners'
-import { menu } from './menu'
+import {auth} from './modules/auth'
+import { partners } from './modules/partners'
+
 
 partners();
 
 auth();
-menu('gusi-lebedi');
+
