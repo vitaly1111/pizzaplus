@@ -26,6 +26,8 @@ const { src,dest,watch,parallel,series }=require('gulp'),
 	rename=require('gulp-rename'),
 	ftp=require('vinyl-ftp')
 
+const webpackConfig = require('./webpack.config');
+
 const styles=() => {
 	return src('src/scss/**/*.scss')
 		.pipe(sourcemaps.init())
@@ -149,30 +151,7 @@ const htmlInclude=()=> {
 
 const scripts=()=>{
 	return src(['src/js/main.js','src/js/restaurant.js'])
-	.pipe(webpackStream({
-		mode: 'development',
-		  entry: {
-        main: './src/js/main.js',
-        restaurant: './src/js/restaurant.js'
-    },
-		output:{
-			filename: '[name].js'
-		},
-		module: {
-			rules: [
-				{ 	
-					test: /\.m?js$/,
-					exclude: /(node_modules|bower_components)/,
-					use: {
-						loader: 'babel-loader',
-						options: {
-							presets: ['@babel/preset-env']
-						}
-					}
-				}
-			]
-		}
-	}))
+		.pipe(webpackStream(webpackConfig))
 
 	.pipe(sourcemaps.init())
 	.pipe(uglify().on('error',notify.onError()))

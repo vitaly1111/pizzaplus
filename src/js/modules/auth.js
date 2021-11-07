@@ -8,9 +8,7 @@ export const auth=() => {
 	const inputLogin=document.getElementById('login');
 	const inputPassword=document.getElementById('password');
 
-	console.dir(modalAuth);
-	console.log(inputLogin)
-	console.log(inputPassword)
+	
 
 	const openModal=() => {
 
