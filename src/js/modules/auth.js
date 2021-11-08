@@ -7,6 +7,7 @@ export const auth=() => {
 	const logInForm=document.getElementById('logInForm');
 	const inputLogin=document.getElementById('login');
 	const inputPassword=document.getElementById('password');
+	const buttonCart=document.querySelector('.button-cart')
 
 	
 
@@ -17,17 +18,20 @@ export const auth=() => {
 		console.log(user)
 		buttonAuth.style.display="none";
 		buttonOut.style.display='flex';
+		buttonCart.style.display='flex';
 		userName.style.display='block';
 		userName.textContent=user.login;
 		modalAuth.style='display:none';
 
 	}
-	const logOut=(user) => {
+	const logOut=() => {
 		buttonAuth.style.display="flex";
 		buttonOut.style.display='none';
 		userName.style.display='none';
+		buttonCart.style.display='none';
 		userName.textContent='';
-		localStorage.removeItem('user')
+		localStorage.removeItem('user');
+		window.location.href='/'
 	}
 
 	buttonAuth.addEventListener('click',() => {
@@ -56,11 +60,12 @@ export const auth=() => {
 
 	})
 
-	buttonOut.addEventListener('click',() => {
-		logOut();
-	})
+	
 	if (localStorage.getItem('user')) {
 		console.log(JSON.parse(localStorage.getItem('user')))
 		logIn(JSON.parse(localStorage.getItem('user')))
 	}
+	buttonOut.addEventListener('click',() => {
+		logOut();
+	})
 }

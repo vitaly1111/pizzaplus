@@ -38,8 +38,14 @@ export const partners=() => {
 					a.addEventListener('click',e=>{
 						console.dir(e)
 						e.preventDefault();
-						localStorage.setItem('restaurant',JSON.stringify(item));
-						window.location.href='/restaurant.html'
+						if(localStorage.getItem('user')){
+							localStorage.setItem('restaurant',JSON.stringify(item));
+							window.location.href='/restaurant.html'
+						}else{
+							//window.location.href='/'
+							document.querySelector('.modal-auth').style.display='flex'
+						}
+						
 					})
 		});
 

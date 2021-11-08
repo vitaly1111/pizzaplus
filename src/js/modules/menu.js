@@ -1,5 +1,6 @@
-export const menu= () => {
 
+export const menu= () => {
+	
 	let rest=""
 	if (localStorage.getItem('restaurant')){
 		rest=JSON.parse(localStorage.getItem('restaurant'));
@@ -20,6 +21,44 @@ export const menu= () => {
 		const title=document.querySelector('.restaurant-title')
 		title.innerText=restaurant;
 	}
+
+	const changeRating=(stars)=>{
+		const rating=document.querySelector('.rating')
+		rating.innerHTML=stars
+	}
+
+	const changePrice=receipt=>{
+		const price=document.querySelector('.price')
+		price.innerHTML=`От ${receipt} ₽`
+	}
+	const changeCategory=kitchen=>{
+		const category=document.querySelector('.category')
+		category.innerHTML=kitchen
+	}
+
+	
+
+	const addToCart=({id,name, price,count})=>{
+		const cartArr=localStorage.getItem('cart')?
+			JSON.parse(localStorage.getItem('cart')):
+			[];
+		if(cartArr.some(item=>item.id===id)){
+			cartArr.map(item=>{
+				if(item.id===id){
+					item.count++
+				}
+			})
+		}else{
+			cartArr.push({ id,name,price,count })
+			
+		}
+		localStorage.setItem('cart',JSON.stringify(cartArr))
+	
+		console.log({id,name,price,count})
+		console.dir(cartArr)
+	}
+
+	
 
 	const renderItems=(data) => {
 		
@@ -50,6 +89,9 @@ export const menu= () => {
 						</div>
 						<!-- /.card-text -->
 					</div>`
+			card.querySelector('.button-add-cart').addEventListener('click',()=>{
+				addToCart({id,name,price,count:1})
+			})
 					cardMenu.append(card)
 			console.log(card)
 		});
@@ -62,6 +104,9 @@ export const menu= () => {
 		)
 		.then(data => {
 			changeTitle(rest.name)
+			changeRating(rest.stars)
+			changePrice(rest.price)
+			changeCategory(rest.kitchen)
 			renderItems(data);
 		}
 		)
